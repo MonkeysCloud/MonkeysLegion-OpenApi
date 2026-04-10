@@ -34,8 +34,8 @@
   ],
   "require": {
     "php": "^8.4",
-    "monkeyscloud/monkeyslegion-router": "dev-main",
-    "monkeyscloud/monkeyslegion-http": "dev-2.x-dev as 1.99.x-dev",
+    "monkeyscloud/monkeyslegion-router": "^2.0 || dev-main",
+    "monkeyscloud/monkeyslegion-http": "^2.0 || dev-2.x-dev as 1.99.x-dev",
     "psr/http-message": "^2.0",
     "psr/http-server-middleware": "^1.0"
   },
@@ -51,6 +51,9 @@
     "psr-4": {
       "MonkeysLegion\\OpenApi\\Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "test": "phpunit"
   },
   "extra": {
     "branch-alias": {
