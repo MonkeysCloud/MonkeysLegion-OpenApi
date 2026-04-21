@@ -18,24 +18,11 @@
   ],
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "repositories": [
-    {
-      "type": "path",
-      "url": "../router",
-      "options": { "symlink": true },
-      "canonical": false
-    },
-    {
-      "type": "path",
-      "url": "../http",
-      "options": { "symlink": true },
-      "canonical": false
-    }
-  ],
   "require": {
     "php": "^8.4",
-    "monkeyscloud/monkeyslegion-router": "^2.0 || dev-main",
+    "monkeyscloud/monkeyslegion-cli": "^2.0",
     "monkeyscloud/monkeyslegion-http": "^2.0 || dev-2.x-dev as 1.99.x-dev",
+    "monkeyscloud/monkeyslegion-router": "^2.0 || dev-main",
     "psr/http-message": "^2.0",
     "psr/http-server-middleware": "^1.0"
   },
