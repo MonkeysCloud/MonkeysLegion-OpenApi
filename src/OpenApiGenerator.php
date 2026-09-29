@@ -12,6 +12,7 @@ use MonkeysLegion\OpenApi\Attributes\ApiSecurity;
 use MonkeysLegion\OpenApi\Attributes\RequestBody;
 use MonkeysLegion\Router\Attributes\Route as RouteAttr;
 use MonkeysLegion\Router\RouteCollection;
+use MonkeysLegion\Router\RouteDefinition;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -69,13 +70,13 @@ final class OpenApiGenerator
         $globalInfo = null;
 
         foreach ($this->routes->all() as $route) {
-            // Resolve handler: direct array or meta['handler']
-            $handler = $route['handler'] ?? null;
-            $handlerPair = match (true) {
-                is_array($handler) && count($handler) >= 2 => $handler,
-                isset($route['meta']['handler']) && is_array($route['meta']['handler']) => $route['meta']['handler'],
-                default => null,
-            };
+            // Resolve handler: use RouteDefinition::handlerPair()
+            $handlerPair = $route instanceof RouteDefinition
+                ? $route->handlerPair()
+                : (is_array($route) ? ($route['handler'] ?? $route['meta']['handler'] ?? null) : null);
+            if (!is_array($handlerPair) || count($handlerPair) < 2) {
+                $handlerPair = null;
+            }
             if ($handlerPair === null) {
                 continue;
             }
